@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BasketsModule } from './basket/baskets.module';
 import { ProductsModule } from './products/products.module';
+
 
 @Module({
     imports: [
@@ -16,8 +18,10 @@ import { ProductsModule } from './products/products.module';
         }),
         TypeOrmModule.forFeature([
             ProductsModule,
+            BasketsModule
         ]),
-        ProductsModule],
+        ProductsModule,
+        BasketsModule],
     controllers: [],
     providers: [],
 })
