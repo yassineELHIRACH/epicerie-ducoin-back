@@ -8,6 +8,10 @@
 
 This example requires docker or a local MySQL installation.  If using a local MySQL database, see `app.module.ts` for credentials, and make sure there are matching credentials in the database and the source code.
 
+#### MySQL databse
+
+Execute the `init.sql` into the database named "market".
+
 #### Docker
 
 There is a `docker-compose.yml` file for starting Docker.
