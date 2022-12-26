@@ -10,7 +10,7 @@ This example requires docker or a local MySQL installation.  If using a local My
 
 #### MySQL databse
 
-Execute the init.sql into the database named "market".
+Execute the `init.sql` into the database named "market".
 
 #### Docker
 
