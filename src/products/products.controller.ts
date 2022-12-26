@@ -6,16 +6,19 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
+import { AdminGuard } from 'src/guards/admin-user.guard';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @UseGuards(AdminGuard)
   @Post('/:type')
   createProductByType(
     @Param('type') productType: string,
@@ -50,7 +53,8 @@ export class ProductsController {
     );
   }
 
-  @Put(':id')
+  @UseGuards(AdminGuard)
+  @Put('/id/:id')
   async update(
     @Param('id') productId: number,
     @Body() updateProductDto: UpdateProductDto,
@@ -59,7 +63,8 @@ export class ProductsController {
     return this.productsService.findByProductId(productId);
   }
 
-  @Delete(':id')
+  @UseGuards(AdminGuard)
+  @Delete('/id/:id')
   async remove(@Param('id') idProduct: number) {
     await this.productsService.delete(idProduct);
     return 'Produit supprimé avec succès';
