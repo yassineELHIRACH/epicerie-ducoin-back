@@ -1,5 +1,4 @@
 export interface IBasket {
-    id: number;
-    price: number;
+  id: number;
+  price: number;
 }
-

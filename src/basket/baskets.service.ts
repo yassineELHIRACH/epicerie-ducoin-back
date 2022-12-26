@@ -9,9 +9,9 @@ export class BasketsService {
   constructor(private readonly basketRepository: BasketRepository) {}
 
   createBasketByPrice(
-    basketPrice: number, 
+    basketPrice: number,
     newBasket: Omit<IBasket, 'id' | 'price'>,
-    ): Promise<Basket> {
+  ): Promise<Basket> {
     const basketToCreate = {
       ...newBasket,
       price: basketPrice,
@@ -23,7 +23,7 @@ export class BasketsService {
     return this.basketRepository.find();
   }
 
-  findByBasketId(basketId: number): Promise<Basket[]>  {
+  findByBasketId(basketId: number): Promise<Basket[]> {
     return this.basketRepository.find({
       where: {
         id: basketId,
@@ -36,7 +36,7 @@ export class BasketsService {
   //     where: {
   //       id: productId,
   //       type: productType,
-  //     },   
+  //     },
   //   });
   // }
 

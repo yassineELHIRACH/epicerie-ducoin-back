@@ -1,17 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { BasketsService } from './baskets.service';
 import { CreateBasketDto } from './dto/create-basket.dto';
 import { Basket } from './entities/basket.entity';
 
 @Controller('basket')
 export class BasketController {
-  constructor(private readonly basketsService: BasketsService) { }
+  constructor(private readonly basketsService: BasketsService) {}
 
   @Post('/:price')
   createBasketByPrice(
-    @Param('price') basketPrice: number, 
+    @Param('price') basketPrice: number,
     @Body() newBasket: CreateBasketDto,
-    ): Promise<Basket> {
+  ): Promise<Basket> {
     return this.basketsService.createBasketByPrice(basketPrice, newBasket);
   }
 
