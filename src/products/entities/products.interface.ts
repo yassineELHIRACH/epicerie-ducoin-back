@@ -1,8 +1,9 @@
 export interface IProduct {
-    id: number;
-    type: string;
-    title: string;
-    price: number;
+  id: number;
+  type: string;
+  title: string;
+  price: number;
+  description: string;
 }
 
 // export const ProductTypes = [
@@ -11,4 +12,3 @@ export interface IProduct {
 //     "Boisson",
 //     "Patisserie"
 // ];
-
