@@ -1,7 +1,9 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { Categories } from './categorie';
 
 export class CreateProductDto {
-  @IsString()
+  @IsEnum(Categories)
+  @IsNotEmpty()
   type: string;
 
   @IsString()
@@ -13,4 +15,14 @@ export class CreateProductDto {
   @IsString()
   @IsOptional()
   description: string;
+
+  @IsNotEmpty()
+  @IsNumberString()
+  @MinLength(1)
+  @MaxLength(5)
+  quantity: number;
+
+  @IsOptional()
+  @IsString()
+  image: string;
 }

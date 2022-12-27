@@ -1,11 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Basket } from 'src/basket/entities/basket.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: '' })
+  @Column({ nullable: false })
   type: string;
 
   @Column()
@@ -17,6 +18,12 @@ export class Product {
   @Column()
   price: number;
 
-  @Column({ default: null })
+  @Column({ default: null }) 
   image: string;
+
+  @Column({ nullable: false })
+  quantity: string;
+
+  @ManyToOne(() => Basket, (basket) => basket.products)
+  basket: Basket;
 }
