@@ -1,59 +1,70 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBasketDto } from './dto/create-basket.dto';
 import { Basket } from './entities/basket.entity';
-import { IBasket } from './entities/baskets.interface';
 import { BasketRepository } from './baskets.repository';
+import { ProductRepository } from 'src/products/products.repository';
 
 @Injectable()
 export class BasketsService {
-  constructor(private readonly basketRepository: BasketRepository) {}
+  constructor(private readonly basketRepository: BasketRepository,
+    private readonly productRepository: ProductRepository) {}
 
-  createBasketByPrice(
-    basketPrice: number,
-    newBasket: Omit<IBasket, 'id' | 'price'>,
-  ): Promise<Basket> {
-    const basketToCreate = {
-      ...newBasket,
-      price: basketPrice,
+  async createBasket(basketDTO: CreateBasketDto) {
+    const productId = [];
+    let totalPrice = 0;
+
+    basketDTO.products.map((p) => {
+      productId.push(p.id),
+      totalPrice += p.price
+    });
+
+    const dbProducts = await this.productRepository.find();
+
+    const Products = [];
+
+    dbProducts.map((p) => {
+      if (productId.includes(p.id)) {
+        Products.push(p);
+      }
+    });
+
+    const myDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const dataBasket = {
+      price: totalPrice,
+      date: myDate,
+      status: false,
     };
-    return this.basketRepository.save(basketToCreate);
+    const newBasket = this.basketRepository.create({ ...dataBasket });
+
+    newBasket.products = Products;
+
+    return await this.basketRepository.save(newBasket);
   }
 
   findAllBaskets(): Promise<Basket[]> {
     return this.basketRepository.find();
   }
 
-  findByBasketId(basketId: number): Promise<Basket[]> {
-    return this.basketRepository.find({
-      where: {
-        id: basketId,
-      },
-    });
+  findByBasketId(id: number): Promise<Basket> {
+    const basket = this.basketRepository.createQueryBuilder()
+      .leftJoinAndSelect('products', 'product')
+      .where('id= :basketId', { basketId: id})
+      .getOne();
+      return basket;
   }
 
-  // findByidAndTypeproduct(productType: string, productId: number): Promise<Product[]>  {
-  //   return this.productRepository.find({
-  //     where: {
-  //       id: productId,
-  //       type: productType,
-  //     },
-  //   });
-  // }
+  async confirmStatus(basketId) {
+    const id = parseInt(basketId);
+    return await this.basketRepository.update({ id }, { status: true })
+  }
 
-  // findByTypeProduct(productType: string): Promise<Product[]> {
-  //   return this.productRepository.find({
-  //     where: {
-  //       type: productType
-  //     }
-  //   })
-  // }
 
-  // //TODO
-  // update(id: number, updateProductDto: UpdateProductDto) {
-  //   return `This action updates a #${id} product`;
-  // }
-
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    return this.basketRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Basket)
+      .where('id= :id', { id })
+      .execute();
   }
 }
