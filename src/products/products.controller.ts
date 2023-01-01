@@ -18,7 +18,7 @@ import { AdminGuard } from 'src/guards/admin-user.guard';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @UseGuards(AdminGuard)
+  //@UseGuards(AdminGuard)
   @Post('/:type')
   createProductByType(
     @Param('type') productType: string,
@@ -53,7 +53,7 @@ export class ProductsController {
     );
   }
 
-  @UseGuards(AdminGuard)
+  //@UseGuards(AdminGuard)
   @Put('/id/:id')
   async update(
     @Param('id') productId: number,
@@ -63,7 +63,7 @@ export class ProductsController {
     return this.productsService.findByProductId(productId);
   }
 
-  @UseGuards(AdminGuard)
+  //@UseGuards(AdminGuard)
   @Delete('/id/:id')
   async remove(@Param('id') idProduct: number) {
     await this.productsService.delete(idProduct);
