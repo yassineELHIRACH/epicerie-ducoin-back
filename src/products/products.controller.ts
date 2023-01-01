@@ -13,12 +13,12 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { AdminGuard } from 'src/guards/admin-user.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  //@UseGuards(AdminGuard)
   @Post('/:type')
   createProductByType(
     @Param('type') productType: string,
@@ -53,7 +53,6 @@ export class ProductsController {
     );
   }
 
-  //@UseGuards(AdminGuard)
   @Put('/id/:id')
   async update(
     @Param('id') productId: number,

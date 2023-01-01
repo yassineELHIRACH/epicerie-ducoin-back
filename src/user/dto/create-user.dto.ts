@@ -14,10 +14,10 @@ export class CreateUserDto {
   username: string;
 
  //idPanier: panier;
-  @IsNumber()
-  @MinLength(8)
-  @MaxLength(30)
-  idPanier: number;
+  // @IsNumber()
+  // @MinLength(8)
+  // @MaxLength(30)
+  // idPanier: number;
 
   @IsNotEmpty()
   @MinLength(8)

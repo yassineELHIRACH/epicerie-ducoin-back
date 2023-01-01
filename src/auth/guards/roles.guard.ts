@@ -14,7 +14,7 @@ export class RolesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     @Inject('USERS_SERVICE') private readonly usersService: UsersService,
-  ) {}
+  ) { }
 
   canActivate(
     context: ExecutionContext,

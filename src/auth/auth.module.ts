@@ -35,4 +35,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     RolesGuard,
   ],
 })
-export class AuthModule {}
+export class AuthModule { }
