@@ -16,7 +16,7 @@ export class BasketController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   findAllBaskets(): Promise<Basket[]> {
     return this.basketsService.findAllBaskets();
   }
@@ -27,7 +27,7 @@ export class BasketController {
   }
 
   @Put('confirm/:id')
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   async confirmBasket(@Param('id') id: number) {
     const basket = await this.basketsService.findByBasketId(id);
     if (!basket) {
