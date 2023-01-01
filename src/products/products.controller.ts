@@ -62,7 +62,6 @@ export class ProductsController {
     return this.productsService.findByProductId(productId);
   }
 
-  //@UseGuards(AdminGuard)
   @Delete('/id/:id')
   async remove(@Param('id') idProduct: number) {
     await this.productsService.delete(idProduct);
