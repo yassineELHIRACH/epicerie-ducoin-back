@@ -1,26 +1,18 @@
 ### Epicerie Du Coin (Back-end)
 
+By `El hirach Yassine` and `Karl Steeve Sena Afatolo`
+
 ### Installation
 
 `npm install`
 
 ### Running
 
-This example requires docker or a local MySQL installation.  If using a local MySQL database, see `app.module.ts` for credentials, and make sure there are matching credentials in the database and the source code.
+This project requires a local MySQK installation. See `src/app.module.ts` for credentials, and make sure there are matching credentials in the database and the source code.
 
 #### MySQL databse
 
 Execute the `init.sql` into the database named "market".
-
-#### Docker
-
-There is a `docker-compose.yml` file for starting Docker.
-
-`docker-compose up`
-
-After running the sample, you can stop the Docker container with
-
-`docker-compose down`
 
 ### Run the sample
 
