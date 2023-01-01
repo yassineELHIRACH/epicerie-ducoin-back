@@ -22,7 +22,7 @@ export class Product {
   image: string;
 
   @Column({ nullable: false })
-  quantity: string;
+  quantity: number;
 
   @ManyToOne(() => Basket, (basket) => basket.products)
   basket: Basket;

@@ -12,13 +12,13 @@ export class User {
   @Column({ nullable: false })
   password: string;
 
-  @Column({ nullable: false })
-  idPanier: number;
+  // @Column({ default: null })
+  // idPanier: number;
 
   @Column({ nullable: false })
   role: string;
 
   @OneToOne(() => Basket)
   @JoinColumn()
-  basketId: Basket;
+  basket: Basket;
 }
