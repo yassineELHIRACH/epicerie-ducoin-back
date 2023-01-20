@@ -29,7 +29,7 @@ Install dependencies
 
 ## Database
 
-This project requires a local MySQK installation. See `src/app.module.ts` for credentials, and make sure there are matching credentials in the database and the source code.
+This project requires a local MySQL installation. See `src/app.module.ts` for credentials, and make sure there are matching credentials in the database and the source code.
 
 Execute the `init.sql` into the database named "market".
 
